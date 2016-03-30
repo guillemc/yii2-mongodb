@@ -856,6 +856,9 @@ class Collection extends Object
                 $rawId = (string) $rawId;
             }
         }
+        if (!is_numeric($rawId)) {
+            return $rawId;
+        }
         try {
             $mongoId = new \MongoDB\BSON\ObjectID($rawId);
         } catch (\MongoDB\Driver\Exception\Exception $e) {
