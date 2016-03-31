@@ -856,11 +856,10 @@ class Collection extends Object
                 $rawId = (string) $rawId;
             }
         }
-        if (!is_numeric($rawId)) {
-            return $rawId;
-        }
         try {
-            $mongoId = new \MongoDB\BSON\ObjectID($rawId);
+            // make sure we pass a copy of the string
+            // (it was being lowercased by the constructor)
+            $mongoId = new \MongoDB\BSON\ObjectID(''.$rawId);
         } catch (\MongoDB\Driver\Exception\Exception $e) {
             // invalid id format
             $mongoId = $rawId;
