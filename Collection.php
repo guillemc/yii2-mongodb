@@ -857,12 +857,12 @@ class Collection extends Object
             }
         }
         try {
-            // make sure we pass a copy of the string
-            // (it was being lowercased by the constructor)
-            $mongoId = new \MongoDB\BSON\ObjectID(''.$rawId);
+            // make sure we have a copy of the string
+            // (it's being lowercased by the constructor)
+            $id = ' '.$rawId;
+            $mongoId = new \MongoDB\BSON\ObjectID($rawId);
         } catch (\MongoDB\Driver\Exception\Exception $e) {
-            // invalid id format
-            $mongoId = $rawId;
+            $mongoId = trim($id);
         }
 
         return $mongoId;
